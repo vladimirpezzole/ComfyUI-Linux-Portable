@@ -7,8 +7,9 @@
 git clone https://github.com/vladimirpezzole/ComfyUI-Linux-Portable.git
 ```
 
-**Execute o Script:**
+**Entre na Pasta 'ComfyUI-Linux-Portable' e execute o Script:**
 ```bash
+cd ComfyUI-Linux-Portable
 ./install-comfyui-portable-linux.sh
 ```
 **Caso dê erro torne o script executável (se não estiver)**

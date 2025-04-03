@@ -91,6 +91,23 @@ conda install pytorch-nightly::pytorch torchvision torchaudio -c pytorch-nightly
 nano run.sh
 ```
 
+**Adicione o script abaixo e salve.**
+```bash
+#!/bin/bash
+
+# Verifica se está na pasta correta
+if [ ! -f "./python_embeded/bin/activate" ] || [ ! -d "./ComfyUI" ]; then
+    echo "ERRO: Execute este script apenas da pasta raiz do ComfyUI Portable!"
+    exit 1
+fi
+
+export PYTHONPATH="$PWD"
+source ./python_embeded/bin/activate
+python ComfyUI/main.py --port 8190 --listen
+```
+**Utilizar a PORTA 8190 pode evitar conflito com alguma outra versão, como o plugin do Krita**
+**--listen te possibilitará de usar o ComfyUI em qualquer outro equipamento via rede**
+
 ### ⚙️ Parâmetros disponíveis:
 
 | Parâmetro       | Exemplo          | Descrição                                                                 |
@@ -106,6 +123,13 @@ nano run.sh
 **1. Configuração para NVIDIA com 4GB VRAM:**
 ```bash
 #!/bin/bash
+
+# Verifica se está na pasta correta
+if [ ! -f "./python_embeded/bin/activate" ] || [ ! -d "./ComfyUI" ]; then
+    echo "ERRO: Execute este script apenas da pasta raiz do ComfyUI Portable!"
+    exit 1
+fi
+
 export PYTHONPATH="$PWD"
 source ./python_embeded/bin/activate
 python ComfyUI/main.py --port 8190 --listen --lowvram
@@ -114,6 +138,13 @@ python ComfyUI/main.py --port 8190 --listen --lowvram
 **2. Configuração para CPU:**
 ```bash
 #!/bin/bash
+
+# Verifica se está na pasta correta
+if [ ! -f "./python_embeded/bin/activate" ] || [ ! -d "./ComfyUI" ]; then
+    echo "ERRO: Execute este script apenas da pasta raiz do ComfyUI Portable!"
+    exit 1
+fi
+
 export PYTHONPATH="$PWD"
 source ./python_embeded/bin/activate
 python ComfyUI/main.py --port 8188 --cpu
@@ -122,6 +153,13 @@ python ComfyUI/main.py --port 8188 --cpu
 **3. Configuração avançada (GPU dedicada + rede):**
 ```bash
 #!/bin/bash
+
+# Verifica se está na pasta correta
+if [ ! -f "./python_embeded/bin/activate" ] || [ ! -d "./ComfyUI" ]; then
+    echo "ERRO: Execute este script apenas da pasta raiz do ComfyUI Portable!"
+    exit 1
+fi
+
 export PYTHONPATH="$PWD"
 source ./python_embeded/bin/activate
 python ComfyUI/main.py --port 8200 --listen --dont-upcast

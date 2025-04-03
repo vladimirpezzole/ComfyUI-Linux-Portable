@@ -1,4 +1,4 @@
- #!/bin/bash
+#!/bin/bash
 
 # Cores para mensagens
 RED='\033[0;31m'
@@ -17,29 +17,40 @@ check_success() {
 echo -e "${GREEN}=== Instalação Portable do ComfyUI para Linux ===${NC}"
 
 # 1. Instalar ComfyUI
-echo -e "${YELLOW}[1/5] Instalando o ComfyUI...${NC}"
-git clone https://github.com/comfyanonymous/ComfyUI.git
-check_success
+echo -e "${YELLOW}[1/5] Verificando ComfyUI...${NC}"
+if [ ! -d "ComfyUI" ]; then
+  git clone https://github.com/comfyanonymous/ComfyUI.git
+  check_success
+else
+  echo -e "${YELLOW}Diretório ComfyUI já existe. Pulando a clonagem.${NC}"
+fi
 
 # 2. Instalar ComfyUI-Manager
-echo -e "${YELLOW}[2/5] Instalando o ComfyUI-Manager...${NC}"
-cd ComfyUI/custom_nodes/ || exit
-git clone https://github.com/Comfy-Org/ComfyUI-Manager.git
-check_success
-cd ../..
+echo -e "${YELLOW}[2/5] Verificando ComfyUI-Manager...${NC}"
+if [ ! -d "ComfyUI/custom_nodes/ComfyUI-Manager" ]; then
+  cd ComfyUI/custom_nodes/ || exit
+  git clone https://github.com/Comfy-Org/ComfyUI-Manager.git
+  check_success
+  cd ../..
+else
+  echo -e "${YELLOW}ComfyUI-Manager já existe. Pulando a instalação.${NC}"
+fi
 
 # 3. Instalar Miniconda
-echo -e "${YELLOW}[3/5] Instalando o Miniconda...${NC}"
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-check_success
-bash Miniconda3-latest-Linux-x86_64.sh -b -p ./python_embeded
-check_success
-rm Miniconda3-latest-Linux-x86_64.sh
+echo -e "${YELLOW}[3/5] Verificando Miniconda...${NC}"
+if [ ! -f "./python_embeded/bin/conda" ]; then
+  [ ! -f "Miniconda3-latest-Linux-x86_64.sh" ] && wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+  check_success
+  bash Miniconda3-latest-Linux-x86_64.sh -b -p ./python_embeded
+  check_success
+  rm Miniconda3-latest-Linux-x86_64.sh
+else
+  echo -e "${YELLOW}Miniconda já instalado. Pulando a instalação.${NC}"
+fi
 
-# 4. Ativar ambiente e instalar requirements
-echo -e "${YELLOW}[4/5] Instalando os requerimentos...${NC}"
-source ./python_embeded/bin/activate
-pip install -r ComfyUI/requirements.txt
+# 4. Instalar requirements
+echo -e "${YELLOW}[4/5] Instalando dependências...${NC}"
+./python_embeded/bin/pip install -r ComfyUI/requirements.txt
 check_success
 
 # 5. Conclusão
@@ -49,8 +60,7 @@ echo -e "1. Configure sua GPU:"
 echo -e "   - Para NVIDIA: instale CUDA e torch com suporte a GPU"
 echo -e "   - Para AMD/Intel: configure ROCm ou oneAPI"
 echo -e "2. Inicie o ComfyUI:"
-echo -e "   $ source ./python_embeded/bin/activate"
-echo -e "   $ cd ComfyUI && python main.py"
+echo -e "   $ ./python_embeded/bin/python ComfyUI/main.py"
 echo -e "\nLembre-se de colocar seus modelos em:"
 echo -e "   - ComfyUI/models/checkpoints/"
 echo -e "   - ComfyUI/models/loras/"

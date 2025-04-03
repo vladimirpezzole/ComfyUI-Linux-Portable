@@ -106,6 +106,7 @@ source ./python_embeded/bin/activate
 python ComfyUI/main.py --port 8190 --listen
 ```
 **Utilizar a PORTA 8190 pode evitar conflito com alguma outra versão, como o plugin do Krita**
+
 **--listen te possibilitará de usar o ComfyUI em qualquer outro equipamento via rede**
 
 ### ⚙️ Parâmetros disponíveis:

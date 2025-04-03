@@ -166,10 +166,14 @@ source ./python_embeded/bin/activate
 python ComfyUI/main.py --port 8200 --listen --dont-upcast
 ```
 
-### 🔒 Tornando executável:
+### 🔒 Execute para dar permissão de execução, tornando executável:
 ```bash
-chmod +x run.sh  # Dá permissão de execução
-./run.sh         # Inicia o ComfyUI
+chmod +x run.sh
+```
+
+## 🔒 Iniciar o ComfyUI: 😊
+```bash
+./run.sh
 ```
 
 💡 **Dica:** Você pode criar múltiplos scripts (ex: `run-gpu.sh`, `run-cpu.sh`) para diferentes configurações!

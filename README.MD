@@ -2,6 +2,7 @@
 ##  📦  "ComfyUI Linux Portable" para Linux
 
 <hr>
+
 ### Considerações iniciais
 
 Aqui você poderá baixar um instalador para uma versão portátil do ComfyUI para Linux AMD64, ou instalar manualmente.

@@ -1,17 +1,17 @@
 
-## 📦  "ComfyUI Linux Portable" para Linux
+##  📦  "ComfyUI Linux Portable" para Linux
 
 <hr>
-###Considerações iniciais
+### Considerações iniciais
 
 Aqui você poderá baixar um instalador para uma versão portátil do ComfyUI para Linux AMD64, ou instalar manualmente.
  *(ainda estou atualizando o instalador para multiplataforma como linux/arm64)*
  
 Também tem, na descrição abaixo, uma versão em testes mutliplataforma no DockerHub.
 
-
 <hr>
-##### 🐋 Docker multiplataforma
+
+<h5> 🐋 Docker multiplataforma </h5>
 
 > **Você pode experimentar  essa versão Docker multiplataforma, ainda não foi testada com Workflows mais complexos.**
 *> Quando tiver feitos mais testes atualizo aqui...*

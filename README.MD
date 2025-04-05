@@ -41,8 +41,9 @@ chmod +x install-comfyui-portable-linux.sh
 ```
 **Após o final siga as instruções e instale as dependências:**
 
-<h5> [>> 💻 **Instalação das Dependências de GPU** <<](#instalacao-gpu) </h5>
+<h5> [>> 💻 Instalação das Dependências de GPU <<](#instalacao-gpu) </h5>
 
+[Instalação das Dependências de GPU](#instalacao-gpu)
 
 
 <hr>

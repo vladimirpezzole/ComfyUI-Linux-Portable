@@ -1,15 +1,35 @@
 
 ## 📦  "ComfyUI Linux Portable" para Linux
 
+<hr>
+###Considerações iniciais
+
+Aqui você poderá baixar um instalador para uma versão portátil do ComfyUI para Linux AMD64, ou instalar manualmente.
+ *(ainda estou atualizando o instalador para multiplataforma como linux/arm64)*
+ 
+Também tem, na descrição abaixo, uma versão em testes mutliplataforma no DockerHub.
+
+
+<hr>
+##### 🐋 Docker multiplataforma
+
+> **Você pode experimentar  essa versão Docker multiplataforma, ainda não foi testada com Workflows mais complexos.**
+*> Quando tiver feitos mais testes atualizo aqui...*
+> **Os testes por enquanto foram feitos em um servidor Aways Free da Oracle, com processador ARM 4 nucleos e 24 de RAM 'sem GPU'.
+> No teste foi usado o workflow padrão com o model '*v1-5-pruned-emaonly-fp16.safetensors*' em CPU, levou 5min para carregar e gerar a imagem e com o Custom-Nodes do Gemini em CPU** *(neste caso não faz tanta diferençajá que quem paga a conta é a Google)*,  **foi em 6s.**
+> 
+> ** Link para acessar a imagem no DockerHub >> https://hub.docker.com/r/vladimirpezzole/comfyui-multipla-clean**
+
+<hr><hr>
+
 ### Baixe diretamente a versão com instalador do '*ComfyUI Linux Portable*' com  '*ComfyUI Manager*' *(recomendado)*...
 
 ```bash
 git clone https://github.com/vladimirpezzole/ComfyUI-Linux-Portable.git
 ```
 
-**Entre na Pasta 'ComfyUI-Linux-Portable' e execute o Script:**
+**Execute o Script:**
 ```bash
-cd ComfyUI-Linux-Portable
 ./install-comfyui-portable-linux.sh
 ```
 **Caso dê erro torne o script executável (se não estiver)**
@@ -18,12 +38,14 @@ chmod +x install-comfyui-portable-linux.sh
 ./install-comfyui-portable-linux.sh
 ```
 **Após o final siga as instruções e instale as dependências:**
-#### 💻 [>> Instalação das Dependências de GPU << ](#instalacao-gpu)
+<h5> [>> 💻 **Instalação das Dependências de GPU** <<](#instalacao-gpu) </h5>
+
+
 
 <hr>
 <hr>
 
-### ⚙️ ...ou se preferir instale Manualmente:
+### ⚙️ ...caso der algum problema 🙈😬 ou se preferir instale Manualmente👍:
 
 #### 1. Prepare a estrutura e clone o ComfyUI
 ```bash
@@ -74,7 +96,7 @@ conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvi
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm6.0
 ```
 
-####  **Mac ARM Silicon**
+#### 🟡 **Mac ARM Silicon**
 ```bash
 conda install pytorch-nightly::pytorch torchvision torchaudio -c pytorch-nightly
 ```
@@ -91,24 +113,6 @@ conda install pytorch-nightly::pytorch torchvision torchaudio -c pytorch-nightly
 nano run.sh
 ```
 
-**Adicione o script abaixo e salve.**
-```bash
-#!/bin/bash
-
-# Verifica se está na pasta correta
-if [ ! -f "./python_embeded/bin/activate" ] || [ ! -d "./ComfyUI" ]; then
-    echo "ERRO: Execute este script apenas da pasta raiz do ComfyUI Portable!"
-    exit 1
-fi
-
-export PYTHONPATH="$PWD"
-source ./python_embeded/bin/activate
-python ComfyUI/main.py --port 8190 --listen
-```
-**Utilizar a PORTA 8190 pode evitar conflito com alguma outra versão, como o plugin do Krita**
-
-**--listen te possibilitará de usar o ComfyUI em qualquer outro equipamento via rede**
-
 ### ⚙️ Parâmetros disponíveis:
 
 | Parâmetro       | Exemplo          | Descrição                                                                 |
@@ -124,13 +128,6 @@ python ComfyUI/main.py --port 8190 --listen
 **1. Configuração para NVIDIA com 4GB VRAM:**
 ```bash
 #!/bin/bash
-
-# Verifica se está na pasta correta
-if [ ! -f "./python_embeded/bin/activate" ] || [ ! -d "./ComfyUI" ]; then
-    echo "ERRO: Execute este script apenas da pasta raiz do ComfyUI Portable!"
-    exit 1
-fi
-
 export PYTHONPATH="$PWD"
 source ./python_embeded/bin/activate
 python ComfyUI/main.py --port 8190 --listen --lowvram
@@ -139,13 +136,6 @@ python ComfyUI/main.py --port 8190 --listen --lowvram
 **2. Configuração para CPU:**
 ```bash
 #!/bin/bash
-
-# Verifica se está na pasta correta
-if [ ! -f "./python_embeded/bin/activate" ] || [ ! -d "./ComfyUI" ]; then
-    echo "ERRO: Execute este script apenas da pasta raiz do ComfyUI Portable!"
-    exit 1
-fi
-
 export PYTHONPATH="$PWD"
 source ./python_embeded/bin/activate
 python ComfyUI/main.py --port 8188 --cpu
@@ -154,26 +144,15 @@ python ComfyUI/main.py --port 8188 --cpu
 **3. Configuração avançada (GPU dedicada + rede):**
 ```bash
 #!/bin/bash
-
-# Verifica se está na pasta correta
-if [ ! -f "./python_embeded/bin/activate" ] || [ ! -d "./ComfyUI" ]; then
-    echo "ERRO: Execute este script apenas da pasta raiz do ComfyUI Portable!"
-    exit 1
-fi
-
 export PYTHONPATH="$PWD"
 source ./python_embeded/bin/activate
 python ComfyUI/main.py --port 8200 --listen --dont-upcast
 ```
 
-### 🔒 Execute para dar permissão de execução, tornando executável:
+### 🔒 Tornando executável:
 ```bash
-chmod +x run.sh
-```
-
-## 🔒 Iniciar o ComfyUI: 😊
-```bash
-./run.sh
+chmod +x run.sh  # Dá permissão de execução
+./run.sh         # Inicia o ComfyUI
 ```
 
 💡 **Dica:** Você pode criar múltiplos scripts (ex: `run-gpu.sh`, `run-cpu.sh`) para diferentes configurações!

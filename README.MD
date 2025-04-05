@@ -19,6 +19,7 @@ Também tem, na descrição abaixo, uma versão em testes mutliplataforma no Doc
 > **Os testes por enquanto foram feitos em um servidor Aways Free da Oracle, com processador ARM 4 nucleos e 24 de RAM 'sem GPU'.
 > No teste foi usado o workflow padrão com o model '*v1-5-pruned-emaonly-fp16.safetensors*' em CPU, levou 5min para carregar e gerar a imagem e com o Custom-Nodes do Gemini em CPU** 
 > *<small>(neste caso não faz tanta diferençajá que quem paga a conta é a Google)</small>*,  **foi em 6s.**
+>
 > **Link para acessar a imagem Docker no DockerHub >> https://hub.docker.com/r/vladimirpezzole/comfyui-multipla-clean**
 
 <hr><hr>

@@ -24,7 +24,7 @@ Também tem, na descrição abaixo, uma versão em testes mutliplataforma no Doc
 
 <hr><hr>
 
-### Baixe diretamente a versão com instalador do '*ComfyUI Linux Portable*' com  '*ComfyUI Manager*' *(recomendado)*...
+## Baixe diretamente a versão com instalador do '*ComfyUI Linux Portable*' com  '*ComfyUI Manager*' *(recomendado)*...
 
 ```bash
 git clone https://github.com/vladimirpezzole/ComfyUI-Linux-Portable.git
@@ -47,7 +47,7 @@ chmod +x install-comfyui-portable-linux.sh
 <hr>
 <hr>
 
-### ⚙️ ...caso der algum problema 🙈😬 ou se preferir instale Manualmente👍:
+## ⚙️ ...caso der algum problema 🙈😬 ou se preferir instale Manualmente👍:
 
 #### 1. Prepare a estrutura e clone o ComfyUI
 ```bash

@@ -25,7 +25,7 @@ Também tem, na descrição abaixo, uma versão em testes mutliplataforma no Doc
 > *<small>(neste caso não faz tanta diferençajá que quem paga a conta é a Google)</small>*,  **foi em 6s.**
 >
 >> **A descrição mais detalahada e YAML para o docker Compose no Overview do link no DockerHub**:
-> **Link para acessar a imagem Docker no DockerHub >> https://hub.docker.com/r/vladimirpezzole/comfyui-multipla-clean**
+> **Link para acessar a imagem Docker no DockerHub >> <a href="https://hub.docker.com/r/vladimirpezzole/comfyui-multipla-clean" target="_blank">https://hub.docker.com/r/vladimirpezzole/comfyui-multipla-clean</a>**
 
 
 <hr><hr>

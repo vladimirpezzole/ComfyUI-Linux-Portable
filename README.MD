@@ -130,7 +130,7 @@ pip install -r ComfyUI/requirements.txt
 [>> Voltar](#home)
 
 >##### **IMPORTANTE!: sempre tenha certeza de estar dentro do ambiente 'conda' em que o 'ComfyUI Portable' foi instalado para fazer qualquer ação via terminal.**
->#####**Mais detalhes >> [ Verificação de ambiente](#adicionais-plugin)**
+>##### **Mais detalhes >> [ Verificação de ambiente](#adicionais-plugin)**
 
 **Certifique-se de estar no ambiente Conda:**
 ```bash
@@ -161,7 +161,7 @@ conda install pytorch-nightly::pytorch torchvision torchaudio -c pytorch-nightly
 [>> Voltar](#home)
 
 >##### **IMPORTANTE!: sempre tenha certeza de estar dentro do ambiente 'conda' em que o 'ComfyUI Portable' foi instalado para fazer qualquer ação via terminal.**
->#####**Mais detalhes >> [ Verificação de ambiente](#adicionais-plugin)**
+>##### **Mais detalhes >> [ Verificação de ambiente](#adicionais-plugin)**
 
 ### 📝 Como criar seu script básico para inicializar seu ComfyUI:
 **Abra seu editor de texto de preferência.**
@@ -239,6 +239,7 @@ ComfyUI_Linux_Portable/
 [>> Voltar](#home)
 
 #### **1. Verificação de ambiente:**
+
 >#### **IMPORTANTE!: sempre tenha certeza de estar dentro do ambiente 'conda' em que o 'ComfyUI Portable' foi instalado para fazer qualquer ação via terminal.**
 
 

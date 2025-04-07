@@ -1,4 +1,5 @@
 ### **Miniconda vs Outras Opções para ComfyUI Portable**
+**[<< Voltar..](https://github.com/vladimirpezzole/ComfyUI-Linux-Portable)**
 
 | Critério               | Miniconda 🐍               | Python Puro + venv 🐍       | Docker 🐳                  |
 |------------------------|---------------------------|----------------------------|--------------------------|

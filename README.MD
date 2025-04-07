@@ -1,4 +1,5 @@
 
+<a id="home"></a>
 ##  📦  "ComfyUI Linux Portable" +  '*ComfyUI Manager*' para Linux com Miniconda
 
 <hr>
@@ -20,15 +21,17 @@ Também tem, na descrição abaixo, uma versão em testes mutliplataforma no Doc
 > **Você pode experimentar  essa versão Docker multiplataforma, ainda não foi testada com Workflows mais complexos.**
 > *Quando tiver feitos mais testes atualizo aqui...*
 > **Os testes por enquanto foram feitos em um servidor Aways Free da Oracle, com processador ARM 4 nucleos e 24 de RAM 'sem GPU'.
-> No teste foi usado o workflow padrão com o model '*v1-5-pruned-emaonly-fp16.safetensors*' em CPU, levou 5min para carregar e gerar a imagem e com o Custom-Nodes do [>Gemini<](https://github.com/ShmuelRonen/ComfyUI-Gemini_Flash_2.0_Exp?tab=readme-ov-file) em CPU** 
+> No teste foi usado o workflow padrão com o model '*v1-5-pruned-emaonly-fp16.safetensors*' em CPU, levou 5min para carregar e gerar a imagem e com o Custom-Nodes do [>Gemini_Flash_2.0_Exp<](https://github.com/ShmuelRonen/ComfyUI-Gemini_Flash_2.0_Exp?tab=readme-ov-file) em CPU** 
 > *<small>(neste caso não faz tanta diferençajá que quem paga a conta é a Google)</small>*,  **foi em 6s.**
 >
+>> **A descrição mais detalahada e YAML para o docker Compose no Overview do link no DockerHub**:
 > **Link para acessar a imagem Docker no DockerHub >> https://hub.docker.com/r/vladimirpezzole/comfyui-multipla-clean**
+
 
 <hr><hr>
 
 ## 🧰 Instalação Automatica
-### Baixe diretamente a versão com instalador do *(recomendado)*, ou instale manualmente.
+### Baixe diretamente a versão com instalador do *(recomendado)*, ou instale [manualmente](#instalacao-manual).
 
 ```bash
 git clone https://github.com/vladimirpezzole/ComfyUI-Linux-Portable.git
@@ -85,7 +88,10 @@ http://<IP-LOCAL-REDE>:8190/    # IP local na rede (ex: 192.168.1.100) - acessí
 <hr>
 <hr>
 
+<a id="instalacao-manual"></a>
 ## 🧰 Instalação Manual
+[>> Voltar](#home)
+
 ### ⚙️ Caso prefira ou tiver algum problema🛠️ 🙈😬 pode instalar  Manualmente👍:
 
 #### 1. Prepare a estrutura e clone o ComfyUI
@@ -121,6 +127,7 @@ pip install -r ComfyUI/requirements.txt
 
 <a id="instalacao-gpu"></a>
 ## 💻 Instalação das Dependências de GPU
+[>> Voltar](#home)
 
 >##### **IMPORTANTE!: sempre tenha certeza de estar dentro do ambiente 'conda' em que o 'ComfyUI Portable' foi instalado para fazer qualquer ação via terminal.**
 >#####**Mais detalhes >> [ Verificação de ambiente](#adicionais-plugin)**
@@ -151,6 +158,7 @@ conda install pytorch-nightly::pytorch torchvision torchaudio -c pytorch-nightly
 
 <a id="script-iniciar"></a>
 ## 🚀 Scripts de Inicialização Personalizados
+[>> Voltar](#home)
 
 >##### **IMPORTANTE!: sempre tenha certeza de estar dentro do ambiente 'conda' em que o 'ComfyUI Portable' foi instalado para fazer qualquer ação via terminal.**
 >#####**Mais detalhes >> [ Verificação de ambiente](#adicionais-plugin)**
@@ -228,6 +236,8 @@ ComfyUI_Linux_Portable/
 
 <a id="adicionais-plugin"></a>
 ## 💡 Dicas Adicionais para resolver alguns problemas:
+[>> Voltar](#home)
+
 #### **1. Verificação de ambiente:**
 >#### **IMPORTANTE!: sempre tenha certeza de estar dentro do ambiente 'conda' em que o 'ComfyUI Portable' foi instalado para fazer qualquer ação via terminal.**
 
@@ -282,7 +292,7 @@ pip install numba==0.58.1 # Aceleração JIT para processamento de vídeo
 pip install torchaudio==2.0.2 # Processamento de áudio com PyTorch
 ```
 
-#### **2. Para atualizar:**
+#### **3. Para atualizar:**
 ```bash
 cd ComfyUI
 git pull

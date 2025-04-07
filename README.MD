@@ -1,5 +1,5 @@
 
-##  📦  "ComfyUI Linux Portable" para Linux
+##  📦  "ComfyUI Linux Portable" +  '*ComfyUI Manager*' para Linux com Miniconda
 
 <hr>
 
@@ -7,6 +7,9 @@
 
 Aqui você poderá baixar um instalador para uma versão portátil do ComfyUI para Linux AMD64, ou instalar manualmente.
  *(ainda estou atualizando o instalador para multiplataforma como linux/arm64)*
+ 
+Nesta instalação estarei usando **Miniconda**, porque oferece o melhor custo-benefício entre portabilidade e funcionalidade.
+Mais informações sobre o porque de usar veja em >> **[Miniconda vs Outras Opções para ComfyUI Portable](Minicons-justificativa.md)**
  
 Também tem, na descrição abaixo, uma versão em testes mutliplataforma no DockerHub.
 
@@ -24,7 +27,8 @@ Também tem, na descrição abaixo, uma versão em testes mutliplataforma no Doc
 
 <hr><hr>
 
-## Baixe diretamente a versão com instalador do '*ComfyUI Linux Portable*' com  '*ComfyUI Manager*' *(recomendado)*...
+## 🧰 Instalação Automatica
+### Baixe diretamente a versão com instalador do *(recomendado)*, ou instale manualmente.
 
 ```bash
 git clone https://github.com/vladimirpezzole/ComfyUI-Linux-Portable.git
@@ -47,7 +51,9 @@ chmod +x install-comfyui-portable-linux.sh
 
 ###  ** 🚀  Inicialização**
 
-**Para incializar execute o scrip `run-auto.sh` , escolha entre usar GPU NVIDEA, AMD ou CPU:**
+***Obsservação: os scripts descritos abaixo estão usando a porta `8190`, para evitar conflito com qualquer outra instalação do ComfyUI existente como o 'Plugin do Krita AI Diffusion', que utilizam por padrão a porta `8188`, mas poderá alterar conforme necessidade como descrito em [>> Scripts de Inicialização Personalizados <<](#script-iniciar)**.
+
+**Para incializar execute o scrip `run-auto.sh`, ele fará automaticamente o acesso seguro ao ambiente conda e na sequencia podera fazer a escolha entre usar GPU NVIDEA, AMD ou CPU:**
 
 ```bash
 ./run-auto.sh
@@ -57,14 +63,30 @@ chmod +x install-comfyui-portable-linux.sh
 chmod +x run-auto.sh 
 ```
 
-**ou utilize o scrip 'run' mais adequado ao seu uso >> mais informações veja a seção:**
+**Também pode utilizar o scrip 'run' mais adequado ao seu uso.**
+```bash
+./run.sh #básico conecta com acesso a rede pelo IP do host na porta 8190
+./run-lowvram.sh # para GPUs com porca VRAM
+./run-cpu.sh # acesso sem uso de GPU
+```
 
-#### [>> 💾 Scripts de Inicialização Personalizados <<](#script-iniciar)
+** mais informações ou se preferir criar seu inicializador personalizado, veja:**
+
+##### [>> 💾 Scripts de Inicialização Personalizados <<](#script-iniciar)
+
+
+####**Para 🚀 acessar o ComfyUI pelo Navegador utlize qualquer dos endereços abaixo**
+```bash
+http://localhost:8190/          # Endereço local na própria máquina
+http://0.0.0.0:8190/            # Endereço genérico para acesso local e externo (todas interfaces de rede)
+http://<IP-LOCAL-REDE>:8190/    # IP local na rede (ex: 192.168.1.100) - acessível por outros dispositivos na mesma rede
+```
 
 <hr>
 <hr>
 
-## ⚙️ ...caso der algum problema 🙈😬 ou se preferir instale Manualmente👍:
+## 🧰 Instalação Manual
+### ⚙️ Caso prefira ou tiver algum problema🛠️ 🙈😬 pode instalar  Manualmente👍:
 
 #### 1. Prepare a estrutura e clone o ComfyUI
 ```bash
@@ -80,7 +102,7 @@ git clone https://github.com/Comfy-Org/ComfyUI-Manager.git
 cd ../..  # Volte para a pasta ComfyUI_Linux_Portable
 ```
 
-#### 3. Configure o Python embutido
+#### 3. Instale o Python embutido com Miniconda pra gerenciar amb
 ```bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b -p ./python_embeded
@@ -99,6 +121,9 @@ pip install -r ComfyUI/requirements.txt
 
 <a id="instalacao-gpu"></a>
 ## 💻 Instalação das Dependências de GPU
+
+>##### **IMPORTANTE!: sempre tenha certeza de estar dentro do ambiente 'conda' em que o 'ComfyUI Portable' foi instalado para fazer qualquer ação via terminal.**
+>#####**Mais detalhes >> [ Verificação de ambiente](#adicionais-plugin)**
 
 **Certifique-se de estar no ambiente Conda:**
 ```bash
@@ -127,8 +152,12 @@ conda install pytorch-nightly::pytorch torchvision torchaudio -c pytorch-nightly
 <a id="script-iniciar"></a>
 ## 🚀 Scripts de Inicialização Personalizados
 
-### 📝 Como criar seu script básico para inicializar seu ComfyUI:
+>##### **IMPORTANTE!: sempre tenha certeza de estar dentro do ambiente 'conda' em que o 'ComfyUI Portable' foi instalado para fazer qualquer ação via terminal.**
+>#####**Mais detalhes >> [ Verificação de ambiente](#adicionais-plugin)**
 
+### 📝 Como criar seu script básico para inicializar seu ComfyUI:
+**Abra seu editor de texto de preferência.**
+**Ex.:**
 ```bash
 nano run.sh
 ```
@@ -197,14 +226,63 @@ ComfyUI_Linux_Portable/
 
 <br><hr>
 
-## 💡 Dicas Adicionais:
-1. Para plugins adicionais:
+<a id="adicionais-plugin"></a>
+## 💡 Dicas Adicionais para resolver alguns problemas:
+#### **1. Verificação de ambiente:**
+>#### **IMPORTANTE!: sempre tenha certeza de estar dentro do ambiente 'conda' em que o 'ComfyUI Portable' foi instalado para fazer qualquer ação via terminal.**
+
+
+**Para isso execute:**
 ```bash
 source ./python_embeded/bin/activate
-pip install timm==0.6.12 transformers==4.36.0
+```
+**Para testar:**
+```bash
+$ conda env list
+```
+**Isso mostrará uma lista de todos os ambientes disponíveis no seu sistema, incluindo o ambiente base. 
+O ambiente atual será marcado com um asterisco (*).**
+
+```bash
+# conda environments:
+#
+base                  * /<caminha-da-instalacao>/ComfyUI-Linux-Portable/python_embeded/envs/comfy_env
+                       /home/outros-ambientes/envs/   #outros ambientes se houver
+                       /media/outros-amvbiente/envs/  #outros ambientes se houver
 ```
 
-2. Para atualizar:
+
+
+**O nome do ambiente atual geralmente é exibido entre parênteses no início do prompt, por exemplo:**
+
+`(comfy_env) usuario@computador:~$` ou `(meu_ambiente) usuario@computador:~$`.xxxx
+<br>
+
+
+
+<hr>
+### **2. Para plugins adicionais:**
+
+**Alguns plugin ou custom-nodes precisaram de algumas instalações adicionais.**
+Exemplos:
+```bash
+# Para nodes de visão computacional e modelos CLIP:
+pip install timm==0.6.12 transformers==4.36.0 # Biblioteca para modelos vision transformers e NLP
+
+# Para compatibilidade com alguns nodes de processamento de imagem:
+pip install numpy==2.1.0 # Requisito específico para alguns plugins de upscaling
+
+# Para nodes que usam OpenCV avançado:
+pip install opencv-python-headless==4.8.0 # Processamento de imagem sem dependências GUI
+
+# Para plugins de animação e interpolação:
+pip install numba==0.58.1 # Aceleração JIT para processamento de vídeo
+
+# Para nodes de áudio (text-to-speech):
+pip install torchaudio==2.0.2 # Processamento de áudio com PyTorch
+```
+
+#### **2. Para atualizar:**
 ```bash
 cd ComfyUI
 git pull

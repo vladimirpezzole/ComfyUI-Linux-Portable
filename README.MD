@@ -266,12 +266,11 @@ base                  * /<caminha-da-instalacao>/ComfyUI-Linux-Portable/python_e
 
 **O nome do ambiente atual geralmente é exibido entre parênteses no início do prompt, por exemplo:**
 
-`(comfy_env) usuario@computador:~$` ou `(meu_ambiente) usuario@computador:~$`.xxxx
+`(comfy_env) usuario@computador:~$` ou `(meu_ambiente) usuario@computador:~$`.
 <br>
 
 
 
-<hr>
 ### **2. Para plugins adicionais:**
 
 **Alguns plugin ou custom-nodes precisaram de algumas instalações adicionais.**

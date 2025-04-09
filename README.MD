@@ -24,7 +24,7 @@ Também tem, na descrição abaixo, uma versão em testes mutliplataforma no Doc
 > No teste foi usado o workflow padrão com o model '*v1-5-pruned-emaonly-fp16.safetensors*' em CPU, levou 5min para carregar e gerar a imagem e com o Custom-Nodes do [>Gemini_Flash_2.0_Exp<](https://github.com/ShmuelRonen/ComfyUI-Gemini_Flash_2.0_Exp?tab=readme-ov-file) em CPU** 
 > *<small>(neste caso não faz tanta diferençajá que quem paga a conta é a Google)</small>*,  **foi em 6s.**
 >
->> **A descrição mais detalahada e YAML para o docker Compose no Overview do link no DockerHub**:
+>> **A descrição mais detalhada e YAML para o docker Compose no Overview do link no DockerHub**:
 > **Link para acessar a imagem Docker no DockerHub >> <a href="https://hub.docker.com/r/vladimirpezzole/comfyui-multipla-clean" target="_blank">https://hub.docker.com/r/vladimirpezzole/comfyui-multipla-clean</a>**
 
 
@@ -78,7 +78,7 @@ chmod +x run-auto.sh
 ##### [>> 💾 Scripts de Inicialização Personalizados <<](#script-iniciar)
 
 
-####**Para 🚀 acessar o ComfyUI pelo Navegador utlize qualquer dos endereços abaixo**
+#### **Para 🚀 acessar o ComfyUI pelo Navegador utlize qualquer dos endereços abaixo**
 ```bash
 http://localhost:8190/          # Endereço local na própria máquina
 http://0.0.0.0:8190/            # Endereço genérico para acesso local e externo (todas interfaces de rede)
@@ -115,11 +115,19 @@ bash Miniconda3-latest-Linux-x86_64.sh -b -p ./python_embeded
 rm Miniconda3-latest-Linux-x86_64.sh  # Remove o instalador após uso
 ```
 
-#### 4. Ative o ambiente e instale dependências
+#### 4. Ative o ambiente 
 ```bash
-source ./python_embeded/bin/activate
+source ativar-amb.sh
+#ou
+conda activate python_embeded/envs/comfy_env
+```
+
+#### 5. Instale dependências
+```bash
+source ativar-amb.sh
 pip install -r ComfyUI/requirements.txt
 ```
+
 
 <hr>
 
@@ -164,11 +172,26 @@ conda install pytorch-nightly::pytorch torchvision torchaudio -c pytorch-nightly
 >##### **Mais detalhes >> [ Verificação de ambiente](#adicionais-plugin)**
 
 ### 📝 Como criar seu script básico para inicializar seu ComfyUI:
-**Abra seu editor de texto de preferência.**
+**Abra o modelo padrão no seu editor de texto de preferência.**
 **Ex.:**
 ```bash
 nano run.sh
 ```
+
+```bash
+#!/bin/bash
+
+# Configurações
+CONDA_ENV="comfy_env"  # Nome do ambiente conda
+export PYTHONPATH="$PWD"
+
+# Ativação do ambiente (em uma linha)
+source "./python_embeded/bin/activate" && conda activate "./python_embeded/envs/${CONDA_ENV}" || { echo "Erro ao ativar ambiente Conda!"; exit 1; }
+
+# Inicialização do ComfyUI >> Porta 8190, acesso via rede,
+python ComfyUI/main.py --port 8190 --listen 
+```
+
 
 ### ⚙️ Parâmetros disponíveis:
 
@@ -180,29 +203,57 @@ nano run.sh
 | `--cpu`         | `--cpu`          | Força a execução usando apenas CPU (ignora GPU)                          |
 | `--dont-upcast` | `--dont-upcast`  | Desativa upcasting de precisão (pode ajudar em GPUs antigas)              |
 
+
+**Altere apenas na linha `# Inicialização do ComfyUI` mantenha o restante como está:** 
+```bash
+# Inicialização do ComfyUI >> Porta 8190, acesso via rede,
+python ComfyUI/main.py --port 8190 --listen 
+```
+
 ### 💻 Exemplos Práticos:
 
 **1. Configuração para NVIDIA com 4GB VRAM:**
 ```bash
 #!/bin/bash
+
+# Configurações
+CONDA_ENV="comfy_env"  # Nome do ambiente conda
 export PYTHONPATH="$PWD"
-source ./python_embeded/bin/activate
-python ComfyUI/main.py --port 8190 --listen --lowvram
+
+# Ativação do ambiente (em uma linha)
+source "./python_embeded/bin/activate" && conda activate "./python_embeded/envs/${CONDA_ENV}" || { echo "Erro ao ativar ambiente Conda!"; exit 1; }
+
+# Inicialização do ComfyUI >> Porta 8190, acesso via rede, baixa memoria
+python ComfyUI/main.py --port 8190 --listen --lowvram 
 ```
 
 **2. Configuração para CPU:**
 ```bash
 #!/bin/bash
+
+# Configurações
+CONDA_ENV="comfy_env"  # Nome do ambiente conda
 export PYTHONPATH="$PWD"
-source ./python_embeded/bin/activate
-python ComfyUI/main.py --port 8188 --cpu
+
+# Ativação do ambiente (em uma linha)
+source "./python_embeded/bin/activate" && conda activate "./python_embeded/envs/${CONDA_ENV}" || { echo "Erro ao ativar ambiente Conda!"; exit 1; }
+
+# Inicialização do ComfyUI >> Porta 8190, acesso via rede, com CPU
+python ComfyUI/main.py --port 8190 --listen --cpu 
 ```
 
 **3. Configuração avançada (GPU dedicada + rede):**
 ```bash
 #!/bin/bash
+
+# Configurações
+CONDA_ENV="comfy_env"  # Nome do ambiente conda
 export PYTHONPATH="$PWD"
-source ./python_embeded/bin/activate
+
+# Ativação do ambiente (em uma linha)
+source "./python_embeded/bin/activate" && conda activate "./python_embeded/envs/${CONDA_ENV}" || { echo "Erro ao ativar ambiente Conda!"; exit 1; }
+
+# Inicialização do ComfyUI >> Porta 8190, acesso via rede,
 python ComfyUI/main.py --port 8200 --listen --dont-upcast
 ```
 
@@ -215,11 +266,13 @@ chmod +x run.sh  # Dá permissão de execução
 💡 **Dica:** Você pode criar múltiplos scripts (ex: `run-gpu.sh`, `run-cpu.sh`) para diferentes configurações!
 
 
-### 🗂 Estrutura de Pastas Final
+### 🗂 Estrutura necessária de Pastas Final
 ```
 ComfyUI_Linux_Portable/
 ├── ComfyUI/              # Arquivos principais
 ├── python_embeded/       # Ambiente Python
+├── ativar-amb.sh         # Script para ativar ambiente conda
+├── run-auto.sh           # Script de inicialização automática 
 ├── run.sh                # Script de inicialização
 └── install-comfyui-portable-linux.sh # Script de instalação
 ```
@@ -243,10 +296,30 @@ ComfyUI_Linux_Portable/
 >#### **IMPORTANTE!: sempre tenha certeza de estar dentro do ambiente 'conda' em que o 'ComfyUI Portable' foi instalado para fazer qualquer ação via terminal.**
 
 
-**Para isso execute:**
+**Para isso execute para ativar o ambiente "comfy_env":**
 ```bash
-source ./python_embeded/bin/activate
+source ativar-amb.sh
 ```
+
+**deve retornar:**
+```bash
+✅ Ambiente ativado com sucesso: comfy_env
+
+Para sair do ambiente digite: exit
+```
+**ou se tiver certeza que está na pasta `ComfyUI-Linux-Portable/` digitie:**
+
+```bash
+conda activate python_embeded/envs/comfy_env
+```
+
+**O nome do ambiente atual geralmente é exibido entre parênteses no início do prompt, por exemplo:**
+
+`(comfy_env) usuario@computador:~$` **ou** `(meu_ambiente) usuario@computador:~$`.
+<br>
+
+
+
 **Para testar:**
 ```bash
 $ conda env list
@@ -257,17 +330,15 @@ O ambiente atual será marcado com um asterisco (*).**
 ```bash
 # conda environments:
 #
-base                  * /<caminha-da-instalacao>/ComfyUI-Linux-Portable/python_embeded/envs/comfy_env
                        /home/outros-ambientes/envs/   #outros ambientes se houver
                        /media/outros-amvbiente/envs/  #outros ambientes se houver
+base                   /<caminha-da-instalacao>/ComfyUI-Linux-Portable/python_embeded
+comfy_env            * /<caminha-da-instalacao>/ComfyUI-Linux-Portable/python_embeded/envs/comfy_env
+
 ```
 
 
 
-**O nome do ambiente atual geralmente é exibido entre parênteses no início do prompt, por exemplo:**
-
-`(comfy_env) usuario@computador:~$` ou `(meu_ambiente) usuario@computador:~$`.
-<br>
 
 
 

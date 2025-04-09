@@ -63,6 +63,11 @@ conda activate "./python_embeded/envs/${CONDA_ENV}" || {
     exit 1
 }
 
+# Verificação do ambiente ativo
+ACTIVE_ENV=$(conda env list | grep '*' | awk '{print $1}')
+# Confirmação
+echo -e "\n✅ ${GREEN}Ambiente ativado com sucesso: ${ACTIVE_ENV}${NC}\n"
+
 # --- Execução ---
 echo -e "${GREEN}Iniciando servidor...${NC}"
 exec python ComfyUI/main.py --port $PORT --listen $args
